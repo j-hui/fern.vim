@@ -53,6 +53,11 @@ Fern ([furn](https://www.youtube.com/watch?v=SSYgr-_69mg)) is a general purpose 
 
 ---
 
+## Forked from lambdalisue/fern.vim
+
+Follow-up from [this issue](https://github.com/lambdalisue/fern.vim/issues/388).
+I wanted to see what would happen if I listed Fern buffers.
+
 ## Concept
 
 - Supports both Vim and Neovim without any external dependencies
