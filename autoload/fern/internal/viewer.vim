@@ -39,6 +39,12 @@ function! s:open(bufname, options, resolve, reject) abort
         \}
 endfunction
 
+function! s:setbuflisted() abort
+  if !g:fern#window_buflisted || fern#internal#drawer#is_drawer()
+    setlocal nobuflisted
+  endif
+endfunction
+
 function! s:init() abort
   command! -buffer -bar -nargs=*
         \ -complete=customlist,fern#internal#command#reveal#complete
@@ -46,7 +52,8 @@ function! s:init() abort
         \ call fern#internal#command#reveal#command(<q-mods>, [<f-args>])
 
   setlocal buftype=nofile bufhidden=unload
-  setlocal noswapfile nobuflisted nomodifiable
+  setlocal noswapfile nomodifiable
+  call s:setbuflisted()
   setlocal signcolumn=yes
   " The 'foldmethod=manual' is required to avoid the following issue
   " https://github.com/lambdalisue/fern.vim/issues/331
@@ -54,7 +61,7 @@ function! s:init() abort
 
   augroup fern_internal_viewer_init
     autocmd! * <buffer>
-    autocmd BufEnter <buffer> setlocal nobuflisted
+    autocmd BufEnter <buffer> call s:setbuflisted()
     autocmd BufReadCmd <buffer> nested call s:BufReadCmd()
     autocmd ColorScheme <buffer> call s:ColorScheme()
     autocmd CursorMoved,CursorMovedI,BufLeave <buffer> let b:fern_cursor = getcurpos()[1:2]

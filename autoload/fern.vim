@@ -46,6 +46,7 @@ call s:Config.config(expand('<sfile>:p'), {
       \ 'drawer_width': 30,
       \ 'drawer_keep': v:false,
       \ 'mark_symbol': '*',
+      \ 'window_buflisted': 0,
       \})
 
 function! fern#version() abort
